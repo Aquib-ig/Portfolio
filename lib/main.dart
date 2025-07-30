@@ -1,35 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/home_page.dart';
+import 'package:portfolio/providers/theme_mode_provider.dart';
 import 'package:portfolio/theme/app_theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-
-      theme: AppTheme.dark,
-      themeMode: ThemeMode.dark,
-      supportedLocales: const [
-        Locale("en"),
-        Locale("es"),
-        Locale("hi"),
-        Locale("ar"),
-        Locale("ur"),
-      ],
-      home: HomePage(),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: themeMode,
+      home: const HomePage(),
     );
   }
 }

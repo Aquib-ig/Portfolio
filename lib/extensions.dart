@@ -23,6 +23,8 @@ extension ResponsiveExtension on BuildContext {
   bool get isTablet => formFactor == ResponsiveLayout.tablet;
   bool get isDesktop => formFactor == ResponsiveLayout.desktop;
 
+  ThemeData get theme => Theme.of(this);
+  
   AppTextStyle get textStyle {
     switch (formFactor) {
       case ResponsiveLayout.mobile:
